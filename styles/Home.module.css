@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
+    background-image: linear-gradient(to bottom right, #00878B, #C1ECD9);
     background-color: #f4f4f4;
   }
 
@@ -86,6 +86,7 @@
     margin: 0;
     line-height: 1.15;
     font-size: 3rem;
+    color:#fff;
   }
 
   .title,
@@ -96,6 +97,7 @@
   .description {
     line-height: 1.5;
     font-size: 1.5rem;
+    color:#fff;
   }
 
   .code {
