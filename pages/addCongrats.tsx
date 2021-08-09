@@ -25,17 +25,16 @@ export default function AddCongrats() {
                 NOME: nome,
                 DESCRICAO: mensagem
             }
-
-            axios.post("https://webapimydelivery.com.br/_api/comemoracao/recado", data)
-                .then(function (res) {
-                    const aux = confirm("Revise com atenção sua mensagem, você não poderá editá-la posteriormente.")
-                    if (aux) {
+            const aux = confirm("Revise com atenção sua mensagem, você não poderá editá-la posteriormente.")
+            if (aux) {
+                axios.post("https://webapimydelivery.com.br/_api/comemoracao/recado", data)
+                    .then(function (res) {
                         router.push("/");
-                    }
-                })
-                .catch(function (err) {
-                    alert(JSON.stringify(err));
-                })
+                    })
+                    .catch(function (err) {
+                        alert(JSON.stringify(err));
+                    })
+            }
         }
     }
 
