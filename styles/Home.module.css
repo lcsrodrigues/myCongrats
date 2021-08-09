@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom right, #00878B, #C1ECD9);
+    background-image: linear-gradient(to bottom right, #00878b, #c1ecd9);
     background-color: #f4f4f4;
   }
 
@@ -30,6 +30,11 @@
   .main .obs {
     font-size: 12px;
     color: red;
+    font-weight: bold;
+  }
+
+  .main .totalMsg {
+    color: #F7B16A;
     font-weight: bold;
   }
 
@@ -86,7 +91,7 @@
     margin: 0;
     line-height: 1.15;
     font-size: 3rem;
-    color:#fff;
+    color: #fff;
   }
 
   .title,
@@ -97,7 +102,7 @@
   .description {
     line-height: 1.5;
     font-size: 1.5rem;
-    color:#fff;
+    color: #fff;
   }
 
   .code {
