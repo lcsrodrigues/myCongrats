@@ -1,8 +1,29 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Cards from './components/cards';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Home() {
+
+  const [arrayMsg, setArrayMsg] = useState([]);
+
+  useEffect(() => {
+    function getAllMensagens() {
+      axios.get("https://webapimydelivery.com.br/_api/comemoracao/recados")
+        .then(function (res) {
+          setArrayMsg(res.data);
+        })
+        .catch(function (err) {
+          alert(JSON.stringify(err));
+        })
+    };
+
+    getAllMensagens();
+
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,58 +33,28 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <div className={styles.perfil}>
+          <Image src="/perfil-rodolpho.jpg" alt="Rodolpho" width={200} height={200} />
+        </div>
+        <h1 className={styles.title}>Parabéns Rodolpho!</h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Te desejamos muita paz, saúde e sucesso em sua vida e que Deus continue a te abençoar.
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {
+            arrayMsg.length ?
+              arrayMsg.map(msg => {
+                return (
+                  <Cards nome={msg.NOME} mensagem={msg.DESCRICAO} key={msg.id} />
+                )
+              })
+              :
+              <h1>Nenhuma mensagem</h1>
+          }
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
