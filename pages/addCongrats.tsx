@@ -53,6 +53,7 @@ export default function AddCongrats() {
                 <h1 className={styles.msgTitle}>Digite seu nome</h1>
                 <input type="text" onBlur={(e) => { setNome(e.target.value) }} />
                 <h1 className={styles.msgTitle}>Digite sua mensagem</h1>
+                <span className={styles.obs}>OBS: Apenas texto! :D</span>
                 <textarea
                     maxLength={200}
                     onBlur={(e) => { setMensagem(e.target.value) }}

@@ -23,8 +23,14 @@
     border-radius: 100%;
   }
 
-  .main .msgTitle{
+  .main .msgTitle {
     text-align: center;
+  }
+
+  .main .obs {
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
   }
 
   .main input {
@@ -44,7 +50,7 @@
     border: 1px solid;
     padding: 10px;
     font-size: 1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .main .btnSalvar {
