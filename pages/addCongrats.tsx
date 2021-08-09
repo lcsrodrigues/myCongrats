@@ -8,23 +8,35 @@ export default function AddCongrats() {
 
     const [nome, setNome] = useState("");
     const [mensagem, setMensagem] = useState("");
+    const [maxCaracteres, setMaxCaracteres] = useState(200);
 
     const saveMessage = () => {
-        console.log(nome);
-        console.log(mensagem);
+        var valid = false;
 
-        const data = {
-            NOME: nome,
-            DESCRICAO: mensagem
+        if (nome.length == 0 || mensagem.length == 0) {
+            valid = false;
+            alert("Os campos não podem ficar em branco.")
+        } else {
+            valid = true;
         }
 
-        axios.post("https://webapimydelivery.com.br/_api/comemoracao/recado", data)
-            .then(function (res) {
-                router.push("/");
-            })
-            .catch(function (err) {
-                alert(JSON.stringify(err));
-            })
+        if (valid) {
+            const data = {
+                NOME: nome,
+                DESCRICAO: mensagem
+            }
+
+            axios.post("https://webapimydelivery.com.br/_api/comemoracao/recado", data)
+                .then(function (res) {
+                    const aux = confirm("Revise com atenção sua mensagem, você não poderá editá-la posteriormente.")
+                    if (aux) {
+                        router.push("/");
+                    }
+                })
+                .catch(function (err) {
+                    alert(JSON.stringify(err));
+                })
+        }
     }
 
     return (
@@ -36,10 +48,19 @@ export default function AddCongrats() {
             </Head>
 
             <main className={styles.main}>
-                <h1 className={styles.title}>Digite seu nome</h1>
-                <input type="text" placeholder="Digite seu nome" onBlur={(e) => { setNome(e.target.value) }} />
-                <h1 className={styles.title}>Digite sua mensagem</h1>
-                <textarea maxLength={200} onBlur={(e) => { setMensagem(e.target.value) }}></textarea>
+                <h1 className={styles.msgTitle}>
+                    Dia 11/08 é aniversário do nosso amigo Rodolpho. Deixe uma mensagem para ele!
+                </h1>
+                <h1 className={styles.msgTitle}>Digite seu nome</h1>
+                <input type="text" onBlur={(e) => { setNome(e.target.value) }} />
+                <h1 className={styles.msgTitle}>Digite sua mensagem</h1>
+                <textarea
+                    maxLength={200}
+                    onBlur={(e) => { setMensagem(e.target.value) }}
+                    onChange={(e) => { setMaxCaracteres(200 - e.target.value.length) }}
+                >
+                </textarea>
+                <span>Limite de caracteres <strong>{maxCaracteres}</strong></span>
                 <div className={styles.btnSalvar} onClick={saveMessage}>Salvar</div>
             </main>
         </div>
